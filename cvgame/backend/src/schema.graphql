@@ -1,0 +1,63 @@
+type Score {
+  game: String
+  score: String
+}
+
+type User {
+  id: ID!
+  name: String!
+  password: String!
+  scores: [Score!]
+}
+
+type Query {
+  users(game: String!): [User!]!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput!): CreateResponse!
+  loginUser(data: CreateUserInput!): LoginResponse!
+  updateUser(data: UpdateUserInput!): UpdateResponse!
+}
+
+type Subscription {
+  userUpdated(game: String!): UserSubscriptionPayload!
+}
+
+input CreateUserInput {
+  name: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  name: String!
+  game: String!
+  score: Int!
+}
+
+type CreateResponse {
+  ok: Boolean!
+  user: User
+  error: String
+}
+
+type LoginResponse {
+  ok: Boolean!
+  user: User
+  error: String
+}
+
+type UpdateResponse {
+  ok: Boolean!
+  user: User
+  error: String
+}
+
+enum MutationType {
+  UPDATED
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  data: [User]
+}
