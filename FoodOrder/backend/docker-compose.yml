@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  node:
+    build: .
+    user: "node"
+    depends_on:
+      - mysql-db
+    volumes:
+      - ./:/app
+    ports:
+      - "80"
+    environment:
+      NODE_ENV: development
+
+  mysql-db:
+    env_file:
+      - ".env"
+    build: db
+    command:
+      - --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./db/data:/var/lib/mysql
+    ports:
+      - "3306"
+    restart: unless-stopped

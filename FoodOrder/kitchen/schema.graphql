@@ -1,0 +1,90 @@
+# GraphQL Auth example https://ithelp.ithome.com.tw/articles/10208278
+
+type Query {
+    queryTest: String!
+    items(restaurantID: ID!):[Item!] # 給這道餐廳所有的餐點，改菜單的時候用
+    todayOrders(restaurantID: ID!): [Order!]
+}
+type Mutation{
+    createOrder(order:inputOrder): String # ? 這條有要給我們測試嗎，還是我們就直接打顧客端那邊的 restful api
+    createItem(data: CreateItemInput!): Item! # 新增一道菜，要自動生成 id 給他
+    updateItem(id: String!, data: UpdateItemInput!): Item! # 更新某道菜的資訊
+    deleteItem(id: String!): Item! # 刪除某道菜
+
+	# login(account: String!, password: String!): Restaurant! # todo: 帳號密碼一開始就要生成給他們
+	# logout: Restaurant!
+
+    # updateOrderState(): Order! # ? 更新菜單
+    # orderID
+    # itemID
+    # state
+}
+
+type Subscription{
+    order(restaurantId: String!): OrderSubscriptionPayload! # 等待新的訂單進來
+}
+
+type OrderKitchen{
+    id: String!
+    tableNo: String!
+    totalPrice: Int!
+    time: String!
+    items: [ItemKitchen!]
+}
+
+type ItemKitchen{
+    id: String!
+    name: String!
+    orderItemInfo: OrderItemInfo!
+}
+
+type OrderSubscriptionPayload{
+    mutation: MutationType!
+    data: OrderKitchen!
+}
+
+type Order{
+	id: ID!
+	restaurantID: ID!
+	customer: Customer!
+	tableNo: String
+    forHere: boolean!
+    arriveTime: String # 如果是null代表已經在餐廳了
+	totalPrice: Int!
+    items: [Item!]!
+	orderedTime: String!
+}
+
+type Customer{  # ? 看customer端那邊有哪些資料，這邊應該只需要名字跟聯絡方式
+	id: ID! 
+	name: String!
+	phoneNumber: String!
+}
+
+type Item{
+    id: ID!
+	name: String!
+	description: String!
+	price: Int!
+	img: String!
+	comments: [Comment!] 
+}
+
+type OrderItemInfo{
+	quantity: Int! 
+	note: String # 針對這道餐點的備註
+}
+
+type Comment{  # ? 看 Customer 會送什麼東西去後端
+    userID: ID # 如果要匿名可以是 null
+    content: String
+    timestamp: String!
+}
+
+type Restaurant{
+    id: ID!
+    name: String!
+    address: String! 
+    img: String # * 這邊我把變數名稱改了 
+    description: String
+}

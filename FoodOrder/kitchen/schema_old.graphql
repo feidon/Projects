@@ -1,0 +1,125 @@
+type Query {
+    queryTest: String!
+    items(restaurantID: ID!):[Item!]
+    todayOrders(restaurantID: ID!): [Order!]
+}
+type Mutation{
+    createOrder(order:inputOrder): String
+    createItem(data: CreateItemInput!): Item! # 新增一道菜，要自動生成 id 給他
+    updateItem(id: String!, data: UpdateItemInput!): Item! # 更新某道菜的資訊
+    deleteItem(id: String!): Item! # 刪除某道菜
+}
+type Subscription{
+    order(restaurantId: String!): OrderSubscriptionPayload! # 等待新的訂單進來
+}
+
+type OrderSubscriptionPayload{
+    mutation: MutationType!
+    data: OrderKitchen!
+}
+type OrderKitchen{
+    id: String!
+    tableNo: String!
+    totalPrice: Int!
+    time: String!
+    items: [ItemKitchen!]
+}
+type ItemKitchen{
+    id: String!
+    name: String!
+    orderItemInfo: OrderItemInfo!
+}
+
+input UpdateItemInput{
+    name: String
+    price: Int
+    img: String
+    description: String
+    type: String
+    tags: [String]
+    rate_ave: Float
+}
+
+input UpdateStatus{
+	itemID: ID!
+	newStatus: Status!
+}
+type Item{
+	id: ID!
+	name: String!
+	description: String!
+	price: Int!
+	img: String!  # 可以是檔案路徑或網址
+	comments: [Comment!] # 先放著，以後如果要做給餐廳看所有評論的介面可以拿這個資料
+	orderItemInfo: OrderItemInfo # 值為null時表示不是在點菜的時候拿這道菜的資訊
+}
+input CreateItemInput{ 
+	name: String!
+	price: Int!
+	img: String
+}
+input UpdateItemInput{
+	name: String!
+	price: Int!
+	img: String
+}
+enum Status{
+    RAW
+    DOING
+    DONE
+}
+
+enum MutationType{
+    CREATED
+    UPDATED
+    DELETED
+}
+
+input inputOrder{
+    id: String
+    tableNo: String
+    totalPrice: Int
+    time: String
+    items: [inputItem]
+}
+input inputItem{
+    id:String
+    name: String
+    price: Int
+    quantity: Int
+    note: String
+    status: String
+}
+type Order{
+	id: ID!
+	restautantID: ID!
+	tableNo: String!
+	items: [Item!]!
+	totalPrice: Int!
+	time: String!
+}
+type orderItem{
+    id:String
+    name: String
+    price: Int
+    quantity: Int
+    note: String
+    status: String
+}
+type Restaurant{
+    id: ID
+    name: String
+    address: String
+    img_url: String
+    description: String
+}
+type OrderItemInfo{
+	quantity: Int! 
+	note: String
+}
+
+type Comment{ 
+	name: String
+	content: String!
+	time: String!
+}

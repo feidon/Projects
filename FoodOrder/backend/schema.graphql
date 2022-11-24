@@ -1,0 +1,156 @@
+type Query {
+    queryTest: String!
+    items(restaurantID: ID!):[Item!]
+    todayOrders(restaurantID: ID!): [Order!]
+    itemAllLang(restaurantID: ID!): [ItemTwoLang!]
+}
+type Mutation{
+    createOrder(order:inputOrder): String
+    createItem(data: CreateItemInput!, file: Upload): Item! # 新增一道菜，要自動生成 id 給他
+    updateItem(id: String!, data: UpdateItemInput!, file: Upload): Item! # 更新某道菜的資訊
+    deleteItem(id: String!): Item! # 刪除某道菜
+    singleUpload(file: Upload!): File!
+    updateOrderItemState(orderId: String!, itemId: String!, state: String!): String!
+}
+type Subscription{
+    order(restaurantId: String!): [Order!] # 等待新的訂單進來
+}
+
+type OrderSubscriptionPayload{
+    mutation: MutationType!
+    data: OrderKitchen!
+}
+type OrderKitchen{
+    id: String!
+    tableNo: String!
+    totalPrice: Int!
+    time: String!
+    items: [Item!]
+}
+type ItemKitchen{
+    id: String!
+    name: String!
+    status: String!
+    orderItemInfo: OrderItemInfo!
+}
+
+input UpdateStatus{
+	itemID: ID!
+	newStatus: Status!
+}
+type ItemTwoLang{
+    id: ID!
+	name: String!
+	description: String!
+	price: Int!
+    status: String!
+	img: String!  # 可以是檔案路徑或網址
+	comments: [Comment!] # 先放著，以後如果要做給餐廳看所有評論的介面可以拿這個資料
+	orderItemInfo: OrderItemInfo # 值為null時表示不是在點菜的時候拿這道菜的資訊
+	type: String! 
+	englishName: String! 
+	englishDescription: String!
+	englishType: String!
+    type: String!
+}
+type Item{
+	id: ID!
+	name: String!
+	description: String!
+	price: Int!
+    status: String!
+	img: String!  # 可以是檔案路徑或網址
+	comments: [Comment!] # 先放著，以後如果要做給餐廳看所有評論的介面可以拿這個資料
+    orderItemInfo: OrderItemInfo # 值為null時表示不是在點菜的時候拿這道菜的資訊
+    type: String!
+}
+
+
+input CreateItemInput{
+	name: String!
+    description: String!,
+	price: Int!
+	img: String!,
+	type: String!,
+	englishName: String!,
+	englishDescription: String!
+	englishType: String!
+}
+input UpdateItemInput{
+	name: String!
+    description: String!,
+	price: Int!
+	img: String!,
+	type: String!,
+	englishName: String!,
+	englishDescription: String!
+	englishType: String!
+}
+enum Status{
+    RAW
+    DOING
+    DONE
+}
+
+enum MutationType{
+    CREATED
+    UPDATED
+    DELETED
+}
+
+input inputOrder{
+    id: String
+    tableNo: String
+    totalPrice: Int
+    time: String
+    items: [inputItem]
+}
+input inputItem{
+    id:String
+    name: String
+    price: Int
+    quantity: Int
+    note: String
+    status: String
+}
+type Order{
+	id: ID!
+	tableNo: String!
+	items: [Item!]!
+	totalPrice: Int!
+	time: String!
+    customerId: String!
+    customerName: String!
+	arrivedTime: String!
+	isTakeOut: String!
+}
+type orderItem{
+    id:String
+    name: String
+    price: Int
+    quantity: Int
+    note: String
+    status: String
+}
+type Restaurant{
+    id: ID
+    name: String
+    address: String
+    img_url: String
+    description: String
+}
+type OrderItemInfo{
+	quantity: Int! 
+	note: String
+    state: String!
+}
+
+type Comment{ 
+	name: String
+	content: String!
+	time: String!
+}
+scalar Upload
+type File{
+    url:String!
+}
