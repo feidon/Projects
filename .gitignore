@@ -1,0 +1,60 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/FoodOrder/customer/node_modules
+FoodOrder/customer/node_modules
+/FoodOrder/customer/.pnp
+FoodOrder/customer/.pnp.js
+
+/FoodOrder/customer/.env
+
+# testing
+/FoodOrder/customer/coverage
+
+# production
+/FoodOrder/customer/build
+
+# misc
+/FoodOrder/customer/.DS_Store
+/FoodOrder/customer/.env.local
+/FoodOrder/customer/.env.development.local
+/FoodOrder/customer/.env.test.local
+/FoodOrder/customer/.env.production.local
+
+/FoodOrder/customer/npm-debug.log*
+/FoodOrder/customer/yarn-debug.log*
+/FoodOrder/customer/yarn-error.log*
+
+# dependencies
+/FoodOrder/kitchen/node_modules
+/FoodOrder/kitchen/.pnp
+/FoodOrder/kitchen/.pnp.js
+
+# testing
+/FoodOrder/kitchen/coverage
+
+# production
+/FoodOrder/kitchen/build
+
+# misc
+/FoodOrder/kitchen/.DS_Store
+/FoodOrder/kitchen/.env.local
+/FoodOrder/kitchen/.env.development.local
+/FoodOrder/kitchen/.env.test.local
+/FoodOrder/kitchen/.env.production.local
+
+/FoodOrder/kitchen/npm-debug.log*
+/FoodOrder/kitchen/yarn-debug.log*
+/FoodOrder/kitchen/yarn-error.log*
+
+/FoodOrder/backend/.idea/
+/FoodOrder/backend/node_modules/
+/FoodOrder/backend/yarn-error.log
+/FoodOrder/backend/.env
+/FoodOrder/backend/db/data/*
+!/FoodOrder/backend/db/data/queries
+/FoodOrder/backend/public
+
+/FoodOrder/backend/.DS_Store
+
+.DS_Store
