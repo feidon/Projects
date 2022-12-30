@@ -1,8 +1,0 @@
-{
-  "baseUrl": null,
-  "trashAssetsBeforeRuns": true,
-  "screenshotOnRunFailure": false,
-  "supportFile": false,
-  "video": false,
-  "responseTimeout": 200
-}
