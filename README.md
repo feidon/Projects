@@ -4,8 +4,8 @@ Quick order是一個餐廳點餐系統，具有雙語介面，通過手機連上
 
 Team: 
 - 顧客方前端: [@Howard Chi](https://github.com/howardon951), [@YuXiangLin](https://github.com/YuXiangLin1234), 我
-- 餐廳方前端: [Max, Gao](https://github.com/Risetto-Kao), [a0932131603](https://github.com/a0932131603)
-- 後端: [Ilya Konnov](https://github.com/konnovdev), [dsa66253](https://github.com/dsa66253)
+- 餐廳方前端: [@Max, Gao](https://github.com/Risetto-Kao), [@a0932131603](https://github.com/a0932131603)
+- 後端: [@Ilya Konnov](https://github.com/konnovdev), [@dsa66253](https://github.com/dsa66253)
 
 ![quickorder](public/quickorder.jpeg)
 ![4 grids](public/4Collage.png)
