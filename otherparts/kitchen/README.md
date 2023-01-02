@@ -15,11 +15,11 @@ Builds the app for production to the `build` folder.\
 
 # Overview
 ## Kitchen
-![image](https://github.com/Risetto-Kao/quick_order_frontend_kitchen/blob/main/%E6%88%AA%E5%9C%96%202022-04-12%20%E4%B8%8A%E5%8D%8811.45.40.png)
+![image](kitchen.png)
 ## Counter
-![image](https://github.com/Risetto-Kao/quick_order_frontend_kitchen/blob/main/%E6%88%AA%E5%9C%96%202022-04-12%20%E4%B8%8A%E5%8D%8811.45.53.png)
+![image](counter.png)
 ## Counter_ModifyMenu
-![image](https://github.com/Risetto-Kao/quick_order_frontend_kitchen/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202022-04-26%20203438.jpg)
+![image](counter_modify.jpg)
 
 # Todo List
 ## Login/register
