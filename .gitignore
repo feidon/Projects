@@ -53,7 +53,6 @@
 **/.env
 **/db/data/*
 !**/db/data/queries
-**/public
 
 **/.DS_Store
 
@@ -163,6 +162,3 @@
 
 # TernJS port file
 **/.tern-port
-
-**/frontend/src/img
-**/frontend/src/img/*

@@ -1,10 +1,13 @@
 # Quick order 快點
 
-A sdm project, online order system.
+Quick order是一個餐廳點餐系統，具有雙語介面，通過手機連上客戶端介面進行點餐，並送到後端伺服器，再由後端傳送點餐資料給廚房端介面進行餐點製作。
+
+Team: [@Howard Chi](https://github.com/howardon951), [@YuXiangLin](https://github.com/YuXiangLin1234)
 
 ![quickorder](public/quickorder.jpeg)
-
 ![4 grids](public/4Collage.png)
+![interface](public/quickorder.png)
+![OAuth](public/oauth.png)
 
 ## Available Scripts
 
