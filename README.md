@@ -1,6 +1,6 @@
 # Quick order 快點
 
-Quick order是一個餐廳點餐系統，具有雙語介面，通過手機連上客戶端介面進行點餐，並送到後端伺服器，再由後端傳送點餐資料給廚房端介面進行餐點製作。
+Quick order是一個餐廳點餐系統，具有雙語介面，通過手機連上客戶端介面進行點餐，並送到後端伺服器，再由後端傳送點餐資料給廚房端介面進行餐點製作。(餐廳端前端介面與後端系統原始碼放置於 otherparts)
 
 Team: [@Howard Chi](https://github.com/howardon951), [@YuXiangLin](https://github.com/YuXiangLin1234)
 
