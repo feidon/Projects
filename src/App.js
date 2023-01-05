@@ -71,13 +71,8 @@ function App() {
   const [userName, setUserName] = useState("--anonymous");
   const [google_ID, setGoogle_ID] = useState("");
 
-
-
-
-
-
   const [orders, setOrders] = useState([]);
-  const [forceIntervalUpdate, setForceIntervalUpdate] = useState(0)
+  const [forceIntervalUpdate, setForceIntervalUpdate] = useState(0);
   const messages = {
     zh: message_zh,
     en: message_en,
@@ -93,10 +88,10 @@ function App() {
     return sum;
   };
 
-  useEffect(async () => {
-    console.log('--------------------------useEffect');
+  useEffect(() => {
+    console.log("--------------------------useEffect");
     InitMixpanel();
-    const { data } = await getOrderById();
+    const { data } = getOrderById();
     setHistoryOrders(data);
     ReactSession.setStoreType("localStorage");
     ReactSession.set("isTakeOut", true);
@@ -108,9 +103,9 @@ function App() {
     ReactSession.set("google_ID", "");
   }, []);
 
-  useEffect(async () => {
-    const { data } = await getOrderById();
-    setHistoryOrders(data)
+  useEffect(() => {
+    const { data } = getOrderById();
+    setHistoryOrders(data);
   }, [forceOrderUpdate]);
   useEffect(() => {
     const getResturantsData = async () => {
@@ -141,7 +136,6 @@ function App() {
           // console.log(data);
           setDishes(data);
           ReactSession.set("dishData", data);
-
         }
       } catch (error) {
         console.log(error);
@@ -160,13 +154,19 @@ function App() {
     // const data = await sendOrderApi(cart);
     try {
       const _ = await sendPrime(cart);
-      console.log(_)
+      console.log(_);
       setTimeout(async () => {
         const payment = await sendPrime(cart);
-        const now = new Date()
-        let newWaitToPay = { "cart": cart, "rec_trade_id": payment.data.rec_trade_id, "linePayUrl": payment.data.payment_url, "expire": now.getTime() + 60 * 1000, "havePayed": false }
-        let WaitToPayList = [...orders, newWaitToPay]
-        setOrders(WaitToPayList)
+        const now = new Date();
+        let newWaitToPay = {
+          cart: cart,
+          rec_trade_id: payment.data.rec_trade_id,
+          linePayUrl: payment.data.payment_url,
+          expire: now.getTime() + 60 * 1000,
+          havePayed: false,
+        };
+        let WaitToPayList = [...orders, newWaitToPay];
+        setOrders(WaitToPayList);
         setLinePayUrl(payment.data.payment_url);
       }, 6000);
     } catch {
@@ -177,9 +177,9 @@ function App() {
     thisModal.style.display = "none";
   };
 
-  const onClick_openLinePay = () => {
-    const newWindow = window.open(linePayUrl, "_blank");
-  };
+  // const onClick_openLinePay = () => {
+  //   const newWindow = window.open(linePayUrl, "_blank");
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -191,7 +191,14 @@ function App() {
               <Route
                 exact
                 path="/"
-                element={<Loginpage authed={authed} setAuthed={setAuthed} setUserName={setUserName} setGoogle_ID={setGoogle_ID} />}
+                element={
+                  <Loginpage
+                    authed={authed}
+                    setAuthed={setAuthed}
+                    setUserName={setUserName}
+                    setGoogle_ID={setGoogle_ID}
+                  />
+                }
               />
               <Route
                 exact
@@ -219,7 +226,14 @@ function App() {
                 path="/menu"
                 element={
                   // <RequireAuth authed={authed}>
-                  <Menu dishes={dishes} cart={cart} setCart={setCart} setDishes={setDishes} lang={lang} userName={userName}></Menu>
+                  <Menu
+                    dishes={dishes}
+                    cart={cart}
+                    setCart={setCart}
+                    setDishes={setDishes}
+                    lang={lang}
+                    userName={userName}
+                  ></Menu>
                   // </RequireAuth>
                 }
               />
@@ -244,20 +258,27 @@ function App() {
                 element={
                   <RequireAuth authed={authed}>
                     <OrdersPage
-                      orders={orders} setOrders={setOrders} historyOrders={historyOrders} getOrderById={getOrderById} forceOrderUpdate={forceOrderUpdate} setForceOrderUpdate={setForceOrderUpdate} setHistoryOrders={setHistoryOrders}
-                      userName={userName} google_ID={google_ID}
+                      orders={orders}
+                      setOrders={setOrders}
+                      historyOrders={historyOrders}
+                      getOrderById={getOrderById}
+                      forceOrderUpdate={forceOrderUpdate}
+                      setForceOrderUpdate={setForceOrderUpdate}
+                      setHistoryOrders={setHistoryOrders}
+                      userName={userName}
+                      google_ID={google_ID}
                     />
                   </RequireAuth>
                 }
               />
-            </Routes >
+            </Routes>
             <BottomNav authed={authed} cart={cart} />
-          </BrowserRouter >
+          </BrowserRouter>
           <Loading modalRef={loadingRef}></Loading>
-        </div >
+        </div>
         <Intl setLang={setLang} />
-      </IntlProvider >
-    </ThemeProvider >
+      </IntlProvider>
+    </ThemeProvider>
   );
 }
 

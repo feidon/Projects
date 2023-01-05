@@ -5,10 +5,13 @@ services:
     user: "node"
     depends_on:
       - mysql-db
+    # command: apk update; apk add -u bash; bash -c 'while !</dev/tcp/db/3306; do sleep 1; done; npm start'
     volumes:
       - ./:/app
+    # expose:
+    #   - "8000"
     ports:
-      - "80"
+      - "8000:80"
     environment:
       NODE_ENV: development
 
@@ -21,5 +24,5 @@ services:
     volumes:
       - ./db/data:/var/lib/mysql
     ports:
-      - "3306"
+      - "8001:3306"
     restart: unless-stopped
